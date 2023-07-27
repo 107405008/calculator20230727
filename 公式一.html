@@ -62,7 +62,7 @@
 
       if (!isNaN(inputA) && !isNaN(inputB) && !isNaN(inputC)) {
         const result1 = defaultValue * (inputA / 10) / (inputB / 100) ;
-        const result2 = defaultValue * (1 - inputA / 10) / inputC;
+        const result2 = defaultValue * (1 - inputA / 10) / (inputC / 100);
         const finalResult = result1 + result2;
 
         resultDiv.innerText = 
