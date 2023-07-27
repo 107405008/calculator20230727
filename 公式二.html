@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>計算用(二)</title>
+  <style>
+    body {
+        width: 100%;
+         margin: 0 auto;
+    }
+    form {
+        padding: 12px 0;
+        width: 100%;
+        text-align: center;
+    }
+    div {
+        padding: 0;
+        width: 100%;
+        text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div>40000 × A ÷ B + 40000 (1-A) ÷ C</div>
+  <form>
+    A = <input type="number" tabindex="1" id="input1"><p></p>
+    B = <input type="number" tabindex="2" id="input2"><p></p>
+    C = <input type="number" tabindex="3" id="input3">
+  </form>
+
+  <div id="result"></div>
+  
+<script>
+  const inputs = document.querySelectorAll('input');
+  const resultDiv = document.getElementById('result');
+
+  inputs.forEach((input, index) => {
+    input.addEventListener('keydown', function (event) {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        const nextIndex = (index + 1) % inputs.length;
+        inputs[nextIndex].focus();
+
+        // Check if the current input is the last one (index === inputs.length - 1)
+        if (index === inputs.length - 1) {
+          // Clear all inputs
+          inputs.forEach((input) => {
+            input.value = '';
+          });
+        }
+      }
+    });
+
+    input.addEventListener('input', function () {
+      const inputA = parseFloat(document.getElementById('input1').value);
+      const inputB = parseFloat(document.getElementById('input2').value);
+      const inputC = parseFloat(document.getElementById('input3').value);
+
+      if (!isNaN(inputA) && !isNaN(inputB) && !isNaN(inputC)) {
+        const result1 = 40000 * inputA / 10 / inputB;
+        const result2 = 40000 * (1 - inputA / 10) / inputC;
+        const finalResult = result1 + result2;
+
+        resultDiv.innerText = 
+          "40000 × A ÷ B = " + result1 + "\n" +
+          "40000 (1 - A) ÷ C = " + result2 + "\n" +
+          "總計： " + finalResult;
+      } else {
+        resultDiv.innerText = "請輸入有效的數字。";
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
