@@ -22,8 +22,9 @@
   </style>
 </head>
 <body>
-  <div>40000 × A ÷ B + 40000 (1 - A) ÷ [(B + B × C) / (1 + B)]</div>
+  <div> N × A ÷ B + N (1 - A) ÷ [(B + B × C) / (1 + B)]</div>
   <form>
+    N = <textarea tabindex="1" id="input0">40000</textarea><p></p>
     A = <input type="number" tabindex="1" id="input1"><p></p>
     B = <input type="number" tabindex="2" id="input2"><p></p>
     C = <input type="number" tabindex="3" id="input3">
@@ -53,20 +54,22 @@
     });
 
     input.addEventListener('input', function () {
-      const inputA = parseFloat(document.getElementById('input1').value);
-      const inputB = parseFloat(document.getElementById('input2').value);
-      const inputC = parseFloat(document.getElementById('input3').value);
+        const inputN = document.getElementById('input0');
+        const defaultValue = parseInt(inputN.textContent);
+        const inputA = parseFloat(document.getElementById('input1').value);
+        const inputB = parseFloat(document.getElementById('input2').value);
+        const inputC = parseFloat(document.getElementById('input3').value);
 
-      if (!isNaN(inputA) && !isNaN(inputB) && !isNaN(inputC)) {
-        const result1 = 40000 * inputA / 10 / (inputB / 100);
-        const result2 = 40000 * (1 - inputA / 10) / (inputB / 100 + inputB / 100 * inputC) * (1 + inputB / 100);
-        const finalResult = result1 + result2;
-        const result3 = result2 / (1 + inputB / 100);
-        const result4 = result3 * (inputB / 100)
+        if (!isNaN(inputA) && !isNaN(inputB) && !isNaN(inputC)) {
+            const result1 = defaultValue * inputA / 10 / (inputB / 100);
+            const result2 = defaultValue * (1 - inputA / 10) / (inputB / 100 + inputB / 100 * inputC) * (1 + inputB / 100);
+            const finalResult = result1 + result2;
+            const result3 = result2 / (1 + inputB / 100);
+            const result4 = result3 * (inputB / 100)
 
         resultDiv.innerText = 
-          "40000 × A ÷ B = " + result1 + "\n" +
-          "40000 (1 - A) ÷ [(B + B × C) / (1 + B)] = " + result2 + "\n" +
+          "N × A ÷ B = " + result1 + "\n" +
+          "N (1 - A) ÷ [(B + B × C) / (1 + B)] = " + result2 + "\n" +
           "總計： " + finalResult + "\n" +
           "X ÷ (1 + B) = " + result3 + "\n" +
           "X ÷ (1 + B) × B = " + result4;
