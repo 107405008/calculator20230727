@@ -31,41 +31,47 @@
 
   <div id="result"></div>
   
-<script>
-  const inputs = document.querySelectorAll('input');
-  const resultDiv = document.getElementById('result');
-
-  inputs.forEach((input, index) => {
-    input.addEventListener('keydown', function (event) {
-      if (event.key === 'Enter') {
-        event.preventDefault();
-        const nextIndex = (index + 1) % inputs.length;
-        inputs[nextIndex].focus();
-
-        // Check if the current input is the last one (index === inputs.length - 1)
-        if (index === inputs.length - 1) {
-          // Clear all inputs
-          inputs.forEach((input) => {
-            input.value = '';
-          });
+  <script>
+    const inputs = document.querySelectorAll('input');
+    const resultDiv = document.getElementById('result');
+  
+    inputs.forEach((input, index) => {
+      input.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter') {
+          event.preventDefault();
+          const nextIndex = (index + 1) % inputs.length;
+          inputs[nextIndex].focus();
+  
+          // Check if the current input is the last one (index === inputs.length - 1)
+          if (index === inputs.length - 1) {
+            // Clear all inputs
+            inputs.forEach((input) => {
+              input.value = '';
+            });
+          }
         }
-      }
+      });
+  
+      input.addEventListener('input', function () {
+        const inputA = parseFloat(document.getElementById('input1').value);
+        const inputB = parseFloat(document.getElementById('input2').value);
+        const inputC = parseFloat(document.getElementById('input3').value);
+  
+        if (!isNaN(inputA) && !isNaN(inputB) && !isNaN(inputC)) {
+          const result1 = 40000 * inputA / inputB;
+          const result2 = 40000 * (1 - inputA) / inputC;
+          const finalResult = result1 + result2;
+  
+          resultDiv.innerText = "計算結果：\n" +
+            "40000 × A ÷ B = " + result1 + "\n" +
+            "40000 (1 - A) ÷ C = " + result2 + "\n" +
+            "總計： " + finalResult;
+        } else {
+          resultDiv.innerText = "請輸入有效的數字。";
+        }
+      });
     });
-
-    input.addEventListener('input', function () {
-      const inputA = parseFloat(document.getElementById('input1').value);
-      const inputB = parseFloat(document.getElementById('input2').value);
-      const inputC = parseFloat(document.getElementById('input3').value);
-
-      if (!isNaN(inputA) && !isNaN(inputB) && !isNaN(inputC)) {
-        const result = 40000 * inputA / inputB + 40000 * (1 - inputA) / inputC;
-        resultDiv.innerText = "計算結果：" + result;
-      } else {
-        resultDiv.innerText = "請輸入有效的數字。";
-      }
-    });
-  });
-</script>
+  </script>
 
 </body>
 </html>
