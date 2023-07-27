@@ -48,6 +48,9 @@
         event.preventDefault();
         const nextIndex = (index + 1) % inputs.length;
         inputs[nextIndex].focus();
+        // 手動觸發 'input' 事件以更新 defaultValue
+        const inputEvent = new Event('input', { bubbles: true });
+        inputs[nextIndex].dispatchEvent(inputEvent);
 
         // Check if the current input is the last one (index === inputs.length - 1)
         if (index === inputs.length - 1) {
