@@ -61,7 +61,7 @@
       const inputC = parseFloat(document.getElementById('input3').value);
 
       if (!isNaN(inputA) && !isNaN(inputB) && !isNaN(inputC)) {
-        const result1 = defaultValue * inputA / 10 / inputB / 100 ;
+        const result1 = defaultValue * (inputA / 10) / (inputB / 100) ;
         const result2 = defaultValue * (1 - inputA / 10) / inputC;
         const finalResult = result1 + result2;
 
