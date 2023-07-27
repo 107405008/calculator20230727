@@ -59,12 +59,12 @@
 
       if (!isNaN(inputA) && !isNaN(inputB) && !isNaN(inputC)) {
         const result1 = 40000 * inputA / 10 / inputB;
-        const result2 = 40000 * (1 - inputA / 10) / inputC;
+        const result2 = 40000 * (1 - inputA / 10) / (inputB + inputB * inputC) * (1 + inputB);
         const finalResult = result1 + result2;
 
         resultDiv.innerText = 
           "40000 × A ÷ B = " + result1 + "\n" +
-          "40000 (1 - A) ÷ C = " + result2 + "\n" +
+          "40000 (1 - A) ÷ [(B + B * C) / (1 + B)] = " + result2 + "\n" +
           "總計： " + finalResult;
       } else {
         resultDiv.innerText = "請輸入有效的數字。";
