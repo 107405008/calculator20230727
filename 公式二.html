@@ -70,12 +70,16 @@
         const inputC = parseFloat(document.getElementById('input3').value);
 
         if (!isNaN(inputA) && !isNaN(inputB) && !isNaN(inputC)) {
-            const result1 = defaultValue * (inputA / 10) / (inputB / 1000);
-            const result2 = defaultValue * (1 - inputA / 10) / (((inputB / 1000) + (inputB / 1000) * (inputC / 100)) / (1 + inputB / 1000));
-            const result3 = result2 / (1 + inputB / 1000);
-            const result4 = result3 * (inputB / 1000)
-            const result5 = result1 + result3
-            const finalResult = result1 + result2;
+          const A = inputA / 10;
+          const B = inputB / 1000;
+          const C = inputC / 100;
+
+          const result1 = defaultValue * A / B;
+          const result2 = defaultValue * (1 - A) / ((B + B * C) / (1 + B));
+          const result3 = result2 / (1 + B);
+          const result4 = result3 * B;
+          const result5 = result1 + result3;
+          const finalResult = result1 + result2;
 
         resultDiv.innerText = 
           "N × A ÷ B = " + result1 + "\n" +
