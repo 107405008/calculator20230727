@@ -28,7 +28,7 @@
   </style>
 </head>
 <body>
-  <div> N × A ÷ B + N (1 - A) ÷ [(B + B × C) / (1 + B)]</div>
+  <div></div>
   <form>
     N = <textarea  rows="1" tabindex="1" id="input0" wrap="off">40000</textarea><p></p>
     A = <input type="number" tabindex="1" id="input1"><p></p>
@@ -70,18 +70,20 @@
         const inputC = parseFloat(document.getElementById('input3').value);
 
         if (!isNaN(inputA) && !isNaN(inputB) && !isNaN(inputC)) {
-            const result1 = defaultValue * (inputA / 10) / (inputB / 100);
-            const result2 = defaultValue * (1 - inputA / 10) / (((inputB / 100) + (inputB / 100) * (inputC / 100)) / (1 + inputB / 100));
+            const result1 = defaultValue * (inputA / 10) / (inputB / 1000);
+            const result2 = defaultValue * (1 - inputA / 10) / (((inputB / 1000) + (inputB / 1000) * (inputC / 100)) / (1 + inputB / 1000));
+            const result3 = result2 / (1 + inputB / 1000);
+            const result4 = result3 * (inputB / 1000)
+            const result5 = result1 + result3
             const finalResult = result1 + result2;
-            const result3 = result2 / (1 + inputB / 100);
-            const result4 = result3 * (inputB / 100)
 
         resultDiv.innerText = 
           "N × A ÷ B = " + result1 + "\n" +
-          "N (1 - A) ÷ [(B + B × C) ÷ (1 + B)] = " + result2 + "\n" +
-          "總計： " + finalResult + "\n" +
           "X ÷ (1 + B) = " + result3 + "\n" +
-          "X ÷ (1 + B) × B = " + result4;
+          "N × A ÷ B + X ÷ (1 + B) = " + result5 + "\n" +
+          "X ÷ (1 + B) × B = " + result4 + "\n" +
+          "總計： " + finalResult ;
+          
       } else {
         resultDiv.innerText = "請輸入有效的數字。";
       }
